@@ -22,6 +22,9 @@ BEGIN
 	)
 END
 GO
+INSERT INTO Cards(Id, Name)
+VALUES (1, 'Visa'), (2, 'Mastercard'), (3, 'AmEx'), (4, 'Discover')
+GO
 
 IF NOT EXISTS (SELECT * FROM sysobjects WHERE name='CardValidations' and xtype='U')
 BEGIN
