@@ -1,0 +1,39 @@
+﻿.card-form {
+    display: flex;
+    flex-direction: column;
+}
+
+    .card-form input {
+        background: whitesmoke;
+        padding: 7px;
+        border: none;
+        width: 20%;
+        margin: 12px 0;
+        border-radius: 3px;
+    }
+
+.cardbtn-area .btnVerify {
+    background: navy;
+    color: white;
+    padding: 7px;
+    width: 10%;
+    border: none;
+    border-radius: 3px;
+}
+
+.cardbtn-area .btnClear {
+    background: grey;
+    color: white;
+    padding: 7px;
+    width: 10%;
+    border: none;
+    border-radius: 3px;
+}
+
+#message {
+    padding: 8px;
+    border-radius: 3px;
+    margin-left: 10px;
+    color: black;
+    display: inline-block;
+}

@@ -1,0 +1,121 @@
+﻿<!--<link href="../content/css/validator.css" rel="stylesheet" />-->
+<style>
+    .card-form {
+        display: flex;
+        flex-direction: column;
+    }
+
+        .card-form input {
+            background: whitesmoke;
+            padding: 7px;
+            border: none;
+            width: 20%;
+            margin: 12px 0;
+            border-radius: 3px;
+        }
+
+    .cardbtn-area .btnVerify {
+        background: navy;
+        color: white;
+        padding: 7px;
+        width: 10%;
+        border: none;
+        border-radius: 3px;
+    }
+
+    .cardbtn-area .btnClear {
+        background: grey;
+        color: white;
+        padding: 7px;
+        width: 10%;
+        border: none;
+        border-radius: 3px;
+    }
+
+    #message {
+        padding: 8px;
+        border-radius: 3px;
+        margin-left: 10px;
+        color: black;
+        display: inline-block;
+    }
+
+</style>
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+</div>
+
+<div class="card-form">
+    <label>Card Number: </label>
+    <input type="text" id="cardNo" onkeypress="return isNumberKey(event)" />
+    <div class="cardbtn-area">
+        <input id="verify" type="button" value="Verify" class="btnVerify" onclick="validate()" />
+        <input id="empty" type="button" value="Clear" class="btnClear" onclick="empty()" />
+        <span id="message" style="success" hidden></span>
+    </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<!--<script src="../content/javascript/validator.js"></script>-->
+<script>
+    function isNumberKey(evt) {
+        var input = document.getElementById("cardNo");
+        var charCode = (evt.which) ? evt.which : evt.keyCode;
+
+        var keyChar = String.fromCharCode(charCode);
+
+        if (/\d/.test(keyChar)) {
+            var value = input.value.replace(/\s/g, '');
+            var formattedValue = '';
+
+            for (var i = 0; i < value.length; i++) {
+                if (i > 0 && i % 4 === 0) {
+                    formattedValue += ' ';
+                }
+                formattedValue += value[i];
+            }
+
+            input.value = formattedValue;
+
+            if (formattedValue.length > 18) {
+                evt.preventDefault();
+                return false;
+            }
+
+            return true;
+        }
+
+        evt.preventDefault();
+        return false;
+    }
+
+    function empty() {
+        document.getElementById("message").setAttribute("hidden", true);
+        document.getElementById("cardNo").value = "";
+    }
+
+    function validate() {
+        var creditCardNo = document.getElementById("cardNo").value.replace(/\s+/g, '');
+
+        $.ajax({
+            url: 'https://localhost:44323/api/CardValidator',
+            type: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify(creditCardNo),
+            success: function (data) {
+
+                var span = document.getElementById("message");
+                span.innerHTML = data.message;
+                span.removeAttribute("hidden");
+                if (data.isValid) {
+                    span.style.background = "lightgreen";
+                } else {
+                    span.style.background = "orange";
+                }
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+            }
+        });
+
+    }
+</script>
