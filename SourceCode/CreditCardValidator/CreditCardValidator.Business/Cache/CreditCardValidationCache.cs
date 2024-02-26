@@ -1,4 +1,5 @@
 ﻿using CreditCardValidator.Business.Support;
+using CreditCardValidator.Data.CustomModels;
 using CreditCardValidator.Data.Models;
 using Microsoft.Extensions.Caching.Memory;
 using System;
@@ -12,16 +13,16 @@ namespace CreditCardValidator.Business.Cache
     public static class CreditCardValidationCache
     {
         private static readonly IMemoryCache Cache = new MemoryCache(new MemoryCacheOptions());
-        static List<CardValidationSPData> CardValidations;
+        static List<CardValidations> CardValidations;
 
-        public static List<CardValidationSPData> GetCardValidations()
+        public static List<CardValidations> GetCardValidations()
         {
-            CardValidations = new List<CardValidationSPData>();
+            CardValidations = new List<CardValidations>();
             bool IsAvaiable = Cache.TryGetValue(Constants.CACHEKEY, out CardValidations);
             return CardValidations;
         }
 
-        public static void SetCardValidations(List<CardValidationSPData> CardValidations)
+        public static void SetCardValidations(List<CardValidations> CardValidations)
         {
             var CacheEntryOptions = new MemoryCacheEntryOptions();
 
