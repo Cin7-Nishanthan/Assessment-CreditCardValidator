@@ -80,3 +80,19 @@ END
 --EXEC	GetCardValidation @CardId = 2
 --EXEC	GetCardValidation @CardId = 3
 --EXEC	GetCardValidation @CardId = 4
+
+--New Script to create new table for Logs
+USE CreditCardValidator
+GO
+
+IF NOT EXISTS (SELECT * FROM sysobjects WHERE name='ApplicationLogs' and xtype='U')
+BEGIN
+	CREATE TABLE ApplicationLogs
+	(
+		Id INT IDENTITY(1,1) PRIMARY KEY,
+		TimeStamp DATETIME NOT NULL,
+		Level NVARCHAR(50) NOT NULL,
+		Message NVARCHAR(MAX),
+		Exception NVARCHAR(MAX)
+	)
+END

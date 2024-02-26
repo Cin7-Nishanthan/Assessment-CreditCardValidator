@@ -17,7 +17,7 @@ namespace CreditCardValidator.Business.Cache
         public static List<CardValidationSPData> GetCardValidations()
         {
             CardValidations = new List<CardValidationSPData>();
-            bool IsAvaiable = Cache.TryGetValue(Constants.CACHEKEY, out  CardValidations);
+            bool IsAvaiable = Cache.TryGetValue(Constants.CACHEKEY, out CardValidations);
             return CardValidations;
         }
 

@@ -22,6 +22,8 @@ namespace CreditCardValidator.API.Controllers
             ResponseData ResponseData = new ResponseData();
             try
             {
+                _logger.LogInformation("Entered Card No is : " + CardNumber);
+
                 CreditCard CreditCard = new CreditCard(new NotEmpty(), new OnlyNumbers(), new LuhnValidate(), new CardNumber());
                 ResponseData.Data = CreditCard.Validate(CardNumber);
                 ResponseData.Status = 1000;
@@ -30,6 +32,7 @@ namespace CreditCardValidator.API.Controllers
             {
                 ResponseData.Status = 1001;
                 ResponseData.Data = Ex.Message;
+                _logger.LogError(Ex, Ex.Message);
             }
 
             return ResponseData;

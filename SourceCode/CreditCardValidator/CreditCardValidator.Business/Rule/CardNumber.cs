@@ -1,6 +1,7 @@
 ﻿using CreditCardValidator.Business.Cache;
 using CreditCardValidator.Data;
 using CreditCardValidator.Data.Models;
+using Microsoft.Data.SqlClient;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,6 +22,10 @@ namespace CreditCardValidator.Business.Rule
 
         public bool IsValid(string CardNumber)
         {
+            int parameterValue = 1;
+            SqlParameter param = new SqlParameter("CardId", parameterValue);
+            var results = UnitOfWork.GetCardValidationStoredProcedure("GetCardValidation", param).ToList();
+
             CardValidations = CreditCardValidationCache.GetCardValidations();
             if (CardValidations == null || CardValidations.Count == 0)
             {
@@ -28,7 +33,7 @@ namespace CreditCardValidator.Business.Rule
                 CreditCardValidationCache.SetCardValidations(CardValidations);
             }
 
-            foreach (CardValidationSPData CardValidation in CardValidations) 
+            foreach (CardValidationSPData CardValidation in CardValidations)
             {
                 if (CardNumber.StartsWith(CardValidation.StartingNumber) && CardNumber.Length == CardValidation.Length)
                     return true;

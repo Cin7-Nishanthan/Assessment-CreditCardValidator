@@ -15,6 +15,8 @@ public partial class CreditCardValidatorContext : DbContext
     {
     }
 
+    public virtual DbSet<ApplicationLog> ApplicationLogs { get; set; }
+
     public virtual DbSet<Card> Cards { get; set; }
 
     public virtual DbSet<CardValidation> CardValidations { get; set; }
@@ -25,6 +27,14 @@ public partial class CreditCardValidatorContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        modelBuilder.Entity<ApplicationLog>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PK__Applicat__3214EC0770B28E4F");
+
+            entity.Property(e => e.Level).HasMaxLength(50);
+            entity.Property(e => e.TimeStamp).HasColumnType("datetime");
+        });
+
         modelBuilder.Entity<Card>(entity =>
         {
             entity.Property(e => e.Id).ValueGeneratedNever();

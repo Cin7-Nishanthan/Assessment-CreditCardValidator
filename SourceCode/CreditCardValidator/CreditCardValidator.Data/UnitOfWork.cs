@@ -1,4 +1,5 @@
-﻿using CreditCardValidator.Data.Models;
+﻿using CreditCardValidator.Data.CustomModels;
+using CreditCardValidator.Data.Models;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -20,6 +21,7 @@ namespace CreditCardValidator.Data
 
         private GenericRepository<Card> _cardRepository;
         private GenericRepository<CardValidation> _cardValidationRepository;
+        private GenericRepository<ApplicationLog> _applicationLogRepository;
 
         public GenericRepository<Card> CardRepository
         {
@@ -61,10 +63,34 @@ namespace CreditCardValidator.Data
             }
         }
 
-
-        public IEnumerable<CardValidation> GetCardValidationStoredProcedure(string procedureName, SqlParameter parameters)
+        public GenericRepository<ApplicationLog> ApplicationLogRepository
         {
-            return _context.Database.SqlQueryRaw<CardValidation>(procedureName, parameters);
+            get
+            {
+                try
+                {
+                    if (_applicationLogRepository == null)
+                    {
+                        _applicationLogRepository = new GenericRepository<ApplicationLog>(_context);
+                    }
+                    return _applicationLogRepository;
+                }
+                catch (Exception ex)
+                {
+                    ex.ToString();
+                    throw;
+                }
+            }
+        }
+
+        public IEnumerable<CardValidations> GetCardValidationStoredProcedure(string procedureName, SqlParameter parameters)
+        {
+                return _context.Database.SqlQueryRaw<CardValidations>(procedureName, parameters);
+        }
+
+        public void Save()
+        {
+            _context.SaveChanges();
         }
 
         public void Dispose()

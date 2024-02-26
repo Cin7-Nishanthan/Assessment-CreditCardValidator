@@ -17,11 +17,6 @@
 
         input.value = formattedValue;
 
-        if (formattedValue.length > 18) {
-            evt.preventDefault();
-            return false;
-        }
-
         return true;
     }
 
@@ -38,19 +33,26 @@ function validate() {
     var creditCardNo = document.getElementById("cardNo").value.replace(/\s+/g, '');
 
     $.ajax({
-        url: 'https://localhost:44323/api/CardValidator',
+        url: 'https://localhost:37059/CreditCardValidator',
         type: 'POST',
         contentType: 'application/json',
         data: JSON.stringify(creditCardNo),
-        success: function (data) {
+        success: function (response) {
 
             var span = document.getElementById("message");
-            span.innerHTML = data.message;
+            
             span.removeAttribute("hidden");
-            if (data.isValid) {
-                span.style.background = "lightgreen";
+            if (response.status = 1001) {
+                if (response.data) {
+                    span.style.background = "lightgreen";
+                    span.innerHTML = "Valid Card";
+                } else {
+                    span.style.background = "orange";
+                    span.innerHTML = "Invalid Card";
+                }               
             } else {
-                span.style.background = "orange";
+                span.innerHTML = response.message;
+                span.style.background = "red";
             }
         },
         error: function (jqXHR, textStatus, errorThrown) {

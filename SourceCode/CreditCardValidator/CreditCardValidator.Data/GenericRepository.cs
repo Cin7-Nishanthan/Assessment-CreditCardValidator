@@ -28,5 +28,10 @@ namespace CreditCardValidator.Data
         {
             return _dbSet.Find(id);
         }
+
+        public virtual void Insert(TEntity entity)
+        {
+            _dbSet.Add(entity);
+        }
     }
 }
