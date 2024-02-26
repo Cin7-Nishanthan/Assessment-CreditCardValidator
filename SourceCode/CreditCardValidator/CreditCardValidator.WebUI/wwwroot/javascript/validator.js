@@ -33,7 +33,7 @@ function validate() {
     var creditCardNo = document.getElementById("cardNo").value.replace(/\s+/g, '');
 
     $.ajax({
-        url: 'https://localhost:37059/CreditCardValidator',
+        url: 'http://localhost:37059/CreditCardValidator',
         type: 'POST',
         contentType: 'application/json',
         data: JSON.stringify(creditCardNo),
@@ -42,7 +42,7 @@ function validate() {
             var span = document.getElementById("message");
             
             span.removeAttribute("hidden");
-            if (response.status = 1001) {
+            if (response.status = 1000) {
                 if (response.data) {
                     span.style.background = "lightgreen";
                     span.innerHTML = "Valid Card";

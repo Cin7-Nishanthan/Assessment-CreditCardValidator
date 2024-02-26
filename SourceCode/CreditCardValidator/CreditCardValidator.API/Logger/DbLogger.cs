@@ -31,7 +31,7 @@ namespace CreditCardValidator.API.Logger
         {
             var logEntry = new ApplicationLog
             {
-                TimeStamp = DateTime.UtcNow,
+                TimeStamp = DateTime.Now,
                 Level = logLevel.ToString(),
                 Message = formatter(state, exception),
                 Exception = exception?.ToString()
