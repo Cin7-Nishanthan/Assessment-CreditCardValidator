@@ -1,5 +1,6 @@
 ﻿using CreditCardValidator.Business.Cache;
 using CreditCardValidator.Data;
+using CreditCardValidator.Data.CustomModels;
 using CreditCardValidator.Data.Models;
 using Microsoft.Data.SqlClient;
 using System;
@@ -13,7 +14,7 @@ namespace CreditCardValidator.Business.Rule
     public class CardNumber : IRule
     {
         UnitOfWork UnitOfWork;
-        List<CardValidationSPData> CardValidations;
+        List<CardValidations> CardValidations;
 
         public CardNumber()
         {
@@ -33,7 +34,7 @@ namespace CreditCardValidator.Business.Rule
                 CreditCardValidationCache.SetCardValidations(CardValidations);
             }
 
-            foreach (CardValidationSPData CardValidation in CardValidations)
+            foreach (CardValidations CardValidation in CardValidations)
             {
                 if (CardNumber.StartsWith(CardValidation.StartingNumber) && CardNumber.Length == CardValidation.Length)
                     return true;
