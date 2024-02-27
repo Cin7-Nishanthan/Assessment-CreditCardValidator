@@ -23,10 +23,6 @@ namespace CreditCardValidator.Business.Rule
 
         public bool IsValid(string CardNumber)
         {
-            int parameterValue = 1;
-            SqlParameter param = new SqlParameter("CardId", parameterValue);
-            var results = UnitOfWork.GetCardValidationStoredProcedure("GetCardValidation", param).ToList();
-
             CardValidations = CreditCardValidationCache.GetCardValidations();
             if (CardValidations == null || CardValidations.Count == 0)
             {
