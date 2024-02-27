@@ -29,7 +29,7 @@ function empty() {
     document.getElementById("cardNo").value = "";
 }
 
-function validate() {
+function validate($, document) {
     var creditCardNo = document.getElementById("cardNo").value.replace(/\s+/g, '');
 
     $.ajax({
@@ -60,3 +60,10 @@ function validate() {
     });
 
 }
+
+$(document).ready(function () {
+    $('#verify').click(function (e) {
+        e.preventDefault();
+        validate($, document);
+    });
+});
