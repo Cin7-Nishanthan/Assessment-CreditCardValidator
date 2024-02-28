@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CreditCardValidator.API.Logger
+namespace CreditCardValidator.Core.Logger
 {
     public class DbLogger : ILogger
     {

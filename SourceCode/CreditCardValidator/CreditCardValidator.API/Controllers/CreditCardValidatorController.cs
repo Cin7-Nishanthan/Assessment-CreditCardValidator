@@ -1,6 +1,7 @@
 using CreditCardValidator.API.Models;
 using CreditCardValidator.Business;
 using CreditCardValidator.Business.Rule;
+using CreditCardValidator.Core;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CreditCardValidator.API.Controllers
@@ -9,20 +10,20 @@ namespace CreditCardValidator.API.Controllers
     [Route("[controller]")]
     public class CreditCardValidatorController : ControllerBase
     {
-        private readonly ILogger<CreditCardValidatorController> _logger;
+        private readonly CoreService _coreService;
 
-        public CreditCardValidatorController(ILogger<CreditCardValidatorController> logger)
+        public CreditCardValidatorController(CoreService coreService)
         {
-            _logger = logger;
+            _coreService = coreService;
         }
 
         [HttpPost]
-        public ResponseData Post([FromBody]string CardNumber)
+        public async Task<ResponseData> Post([FromBody]string CardNumber)
         {
             ResponseData ResponseData = new ResponseData();
             try
             {
-                _logger.LogInformation("Entered Card No is : " + CardNumber);
+                await _coreService.AddInfoLogs("Entered Card No is : " + CardNumber);
 
                 CreditCard CreditCard = new CreditCard(new NotEmpty(), new OnlyNumbers(), new LuhnValidate(), new CardNumber());
                 ResponseData.Data = CreditCard.Validate(CardNumber);
@@ -32,7 +33,7 @@ namespace CreditCardValidator.API.Controllers
             {
                 ResponseData.Status = 1001;
                 ResponseData.Data = Ex.Message;
-                _logger.LogError(Ex, Ex.Message);
+                await _coreService.AddErrorLogs(Ex);
             }
 
             return ResponseData;

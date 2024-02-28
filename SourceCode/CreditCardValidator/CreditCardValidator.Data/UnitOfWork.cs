@@ -19,11 +19,11 @@ namespace CreditCardValidator.Data
             _context = context;
         }
 
-        private GenericRepository<Card> _cardRepository;
-        private GenericRepository<CardValidation> _cardValidationRepository;
-        private GenericRepository<ApplicationLog> _applicationLogRepository;
+        private IRepository<Card> _cardRepository;
+        private IRepository<CardValidation> _cardValidationRepository;
+        private IRepository<ApplicationLog> _applicationLogRepository;
 
-        public GenericRepository<Card> CardRepository
+        public IRepository<Card> CardRepository
         {
             get
             {
@@ -43,7 +43,7 @@ namespace CreditCardValidator.Data
             }
         }
 
-        public GenericRepository<CardValidation> CardValidationRepository
+        public IRepository<CardValidation> CardValidationRepository
         {
             get
             {
@@ -63,7 +63,7 @@ namespace CreditCardValidator.Data
             }
         }
 
-        public GenericRepository<ApplicationLog> ApplicationLogRepository
+        public IRepository<ApplicationLog> ApplicationLogRepository
         {
             get
             {

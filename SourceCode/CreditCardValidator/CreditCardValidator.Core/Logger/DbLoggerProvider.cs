@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CreditCardValidator.API.Logger
+namespace CreditCardValidator.Core.Logger
 {
     public class DbLoggerProvider : ILoggerProvider
     {
@@ -24,8 +24,7 @@ namespace CreditCardValidator.API.Logger
         }
 
         public void Dispose()
-        {
-            throw new NotImplementedException();
+        {          
         }
     }
 }

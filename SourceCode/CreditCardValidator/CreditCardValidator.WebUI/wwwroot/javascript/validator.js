@@ -42,7 +42,7 @@ function validate($, document) {
             var span = document.getElementById("message");
             
             span.removeAttribute("hidden");
-            if (response.status = 1000) {
+            if (response.status === 1000) {
                 if (response.data) {
                     span.style.background = "lightgreen";
                     span.innerHTML = "Valid Card";
@@ -55,7 +55,8 @@ function validate($, document) {
                 span.style.background = "red";
             }
         },
-        error: function (jqXHR, textStatus, errorThrown) {
+        error: function (jqXHR, textStatus, errorThrown)
+        {
         }
     });
 

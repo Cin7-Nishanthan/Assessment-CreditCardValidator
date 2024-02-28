@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace CreditCardValidator.Data
 {
-    public class GenericRepository<TEntity> where TEntity : class
+    public class GenericRepository<TEntity> : IRepository<TEntity> where TEntity : class
     {
         internal CreditCardValidatorContext _context;
         internal DbSet<TEntity> _dbSet;
