@@ -1,17 +1,20 @@
 ﻿<link href="/css/validator.css" rel="stylesheet" />
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
+<div class="body-form">
+    <div class="text-center">
+        <h1 class="display-4">Welcome</h1>
+    </div>
+    <div class="card-form">
+        <label>Card Number: </label>
+        <input type="text" id="cardNo" onkeypress="return isNumberKey(event)"  />
+        <div class="cardbtn-area">
+            <input id="verify" type="button" value="Verify" class="btnVerify" />
+            <input id="clear" type="button" value="Clear" class="btnClear" />
+            <span id="message" class="message"></span>
+        </div>
+    </div>
+    <div id="wait" class="loading-gif"><img src="/dist/img/Loading.gif" width="70" height="70" /><br></div>
 </div>
 
-<div class="card-form">
-    <label>Card Number: </label>
-    <input type="text" id="cardNo" onkeypress="return isNumberKey(event)" />
-    <div class="cardbtn-area">
-        <input id="verify" type="button" value="Verify" class="btnVerify" />
-        <input id="empty" type="button" value="Clear" class="btnClear" onclick="empty()" />
-        <span id="message" style="success" hidden></span>
-    </div>
-</div>
 <script src="/libs/jquery/dist/jquery.min.js"></script>
 <script src="/javascript/validator.js"></script>
