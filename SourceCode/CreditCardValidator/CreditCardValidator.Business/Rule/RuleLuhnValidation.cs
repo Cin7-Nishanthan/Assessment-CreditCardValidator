@@ -7,14 +7,14 @@ using System.Threading.Tasks;
 
 namespace CreditCardValidator.Business.Rule
 {
-    public class LuhnValidate : IRule
+    public class RuleLuhnValidation : IRule
     {
-        Luhn Luhn;
+        Luhn _luhn;
         
-        public bool IsValid(string CardNumber)
+        public bool IsValid(string cardNumber)
         {
-            Luhn = new Luhn(CardNumber);
-            return Luhn.IsValid();
+            _luhn = new Luhn(cardNumber);
+            return _luhn.IsValid();
         }
     }
 }

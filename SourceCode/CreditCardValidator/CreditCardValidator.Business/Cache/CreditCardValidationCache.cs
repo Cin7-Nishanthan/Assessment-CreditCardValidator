@@ -1,32 +1,32 @@
-﻿using CreditCardValidator.Business.Support;
-using CreditCardValidator.Data.CustomModels;
+﻿
+
 using CreditCardValidator.Data.Models;
 using Microsoft.Extensions.Caching.Memory;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using CreditCardValidator.Business.Support;
 
 namespace CreditCardValidator.Business.Cache
 {
     public static class CreditCardValidationCache
     {
-        private static readonly IMemoryCache Cache = new MemoryCache(new MemoryCacheOptions());
-        static List<CardValidations> CardValidations;
+        #region " Vars "
+        private static readonly IMemoryCache _cache = new MemoryCache(new MemoryCacheOptions());
+        static List<CardValidation> _cardValidations;
+        #endregion
 
-        public static List<CardValidations> GetCardValidations()
+        #region " Methods "
+        public static List<CardValidation> GetCardValidations()
         {
-            CardValidations = new List<CardValidations>();
-            bool IsAvaiable = Cache.TryGetValue(Constants.CACHEKEY, out CardValidations);
-            return CardValidations;
+            _cardValidations = new List<CardValidation>();
+            bool IsAvaiable = _cache.TryGetValue(Constants.CACHEKEY, out _cardValidations);
+            return _cardValidations;
         }
 
-        public static void SetCardValidations(List<CardValidations> CardValidations)
+        public static void SetCardValidations(List<CardValidation> cardValidations)
         {
-            var CacheEntryOptions = new MemoryCacheEntryOptions();
+            var cacheEntryOptions = new MemoryCacheEntryOptions();
 
-            Cache.Set(Constants.CACHEKEY, CardValidations, CacheEntryOptions);
+            _cache.Set(Constants.CACHEKEY, cardValidations, cacheEntryOptions);
         }
+        #endregion
     }
 }

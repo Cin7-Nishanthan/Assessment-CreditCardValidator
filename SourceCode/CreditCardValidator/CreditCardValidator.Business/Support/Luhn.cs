@@ -1,84 +1,89 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
 
 namespace CreditCardValidator.Business.Support
 {
     public class Luhn
     {
-        List<LuhnData> LuneDataList = new List<LuhnData>();
-        string CardNumber;
+        #region " Vars "
 
-        public Luhn(string CardNumber)
+        List<LuhnData> _luneDataList = new List<LuhnData>();
+        string _cardNumber;
+
+        #endregion
+
+
+        #region " Constructor "
+        
+        public Luhn(string cardNumber)
         {
-            this.CardNumber = CardNumber;
+            this._cardNumber = cardNumber;
             ToLuneData();
             Process();
         }
 
+        #endregion
+
+
+        #region " Methods "
+
         void ToLuneData()
         {
-            char[] Digits = CardNumber.ToCharArray();
-            for (int Index = Digits.Length - 2; Index >= 0; Index--)
+            char[] digits = _cardNumber.ToCharArray();
+            for (int index = digits.Length - 2; index >= 0; index--)
             {
-                if (Index % 2 == 1)
-                    LuneDataList.Add(new LuhnData() { Digit = int.Parse(Digits[Index].ToString()), Weight = 2 });
+                if (index % 2 == 1)
+                    _luneDataList.Add(new LuhnData() { Digit = int.Parse(digits[index].ToString()), Weight = 2 });
                 else
-                    LuneDataList.Add(new LuhnData() { Digit = int.Parse(Digits[Index].ToString()), Weight = 1 });
+                    _luneDataList.Add(new LuhnData() { Digit = int.Parse(digits[index].ToString()), Weight = 1 });
             }
         }
 
         void Process()
         {
-            int Product;
-            List<int> ProductDigits;
-            foreach (var LuneData in LuneDataList)
+            int product;
+            List<int> productDigits;
+            foreach (var luneData in _luneDataList)
             {
-                Product = LuneData.Digit * LuneData.Weight;
-                if (Product < 10)
-                    LuneData.Product = Product;
+                product = luneData.Digit * luneData.Weight;
+                if (product < 10)
+                    luneData.Product = product;
                 else
                 {
-                    ProductDigits = new List<int>();
-                    Product.ToDigits(ref ProductDigits);
-                    Product = ProductDigits.Sum();
-                    LuneData.Product = Product;
+                    productDigits = new List<int>();
+                    product.ToDigits(ref productDigits);
+                    product = productDigits.Sum();
+                    luneData.Product = product;
                 }
             }
         }
 
         public bool IsValid()
         {
-            int NumberOfDigits = CardNumber.Length;
+            int numberOfDigits = _cardNumber.Length;
 
-            int Sum = 0;
-            bool IsSecond = false;
-            for (int i = NumberOfDigits - 1; i >= 0; i--)
+            int sum = 0;
+            bool isSecond = false;
+            int d;
+            for (int i = numberOfDigits - 1; i >= 0; i--)
             {
 
-                int D = CardNumber[i] - '0';
+                d = _cardNumber[i] - '0';
 
-                if (IsSecond == true)
-                    D = D * 2;
+                if (isSecond == true)
+                    d = d * 2;
 
                 // We add two digits to handle
                 // cases that make two digits 
                 // after doubling
-                Sum += D / 10;
-                Sum += D % 10;
+                sum += d / 10;
+                sum += d % 10;
 
-                IsSecond = !IsSecond;
+                isSecond = !isSecond;
             }
-            return (Sum % 10 == 0);
-            /*if (LuneDataList.Sum(L => L.Product) % 10 == 0)
-                return true;
-            else
-                return false;*/
-
-
+            return (sum % 10 == 0);
         }
+
+        #endregion
 
     }
 

@@ -1,4 +1,4 @@
-using CreditCardValidator.Core;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -21,7 +21,7 @@ builder.Services.AddCors(options =>
 
 //builder.Services.AddSingleton<ILoggerProvider, DbLoggerProvider>();
 //builder.Services.AddLogging();
-builder.Services.AddCoreServices();
+//builder.Services.AddCoreServices();
 
 var app = builder.Build();
 

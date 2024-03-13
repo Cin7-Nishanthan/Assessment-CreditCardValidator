@@ -1,42 +1,46 @@
-using CreditCardValidator.API.Models;
-using CreditCardValidator.Business;
-using CreditCardValidator.Business.Rule;
-using CreditCardValidator.Core;
+
+using Core;
+using Core.API;
+using System.Text.Json;
 using Microsoft.AspNetCore.Mvc;
+using CreditCardValidator.Utils;
+using CreditCardValidator.Business.Rule;
 
 namespace CreditCardValidator.API.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class CreditCardValidatorController : ControllerBase
+    public class CreditCardValidatorController : BaseController
     {
-        private readonly CoreService _coreService;
-
-        public CreditCardValidatorController(CoreService coreService)
+        #region " Constructor "
+        public CreditCardValidatorController():base(new Logger())
         {
-            _coreService = coreService;
+            
         }
+        #endregion
 
+        #region " EndPoints "
         [HttpPost]
-        public async Task<ResponseData> Post([FromBody]string CardNumber)
+        public async Task<ResponseData> Post([FromBody]string cardNumber)
         {
-            ResponseData ResponseData = new ResponseData();
             try
             {
-                await _coreService.AddInfoLogs("Entered Card No is : " + CardNumber);
+                _logger.Log(1, "Request starts", cardNumber);
 
-                CreditCard CreditCard = new CreditCard(new NotEmpty(), new OnlyNumbers(), new LuhnValidate(), new CardNumber());
-                ResponseData.Data = CreditCard.Validate(CardNumber);
-                ResponseData.Status = 1000;
+                Business.CreditCardValidator creditCardValidation = new Business.CreditCardValidator(new RuleNotEmptyValidation(), new RuleOnlyNumbersValidation(), new RuleLuhnValidation(), new RuleCardNumberValidation());
+                _responseData.Data = creditCardValidation.Validate(cardNumber);
+                _responseData.Status = 1000;
             }
             catch (Exception Ex) 
             {
-                ResponseData.Status = 1001;
-                ResponseData.Data = Ex.Message;
-                await _coreService.AddErrorLogs(Ex);
-            }
+                _responseData.Status = 1001;
+                _responseData.Data = Ex.Message;
+                _logger.Log(3, "Exception in validation process", null,Ex.Message);
 
-            return ResponseData;
+            }
+            _logger.Log(3, "Response sent", null, null, JsonSerializer.Serialize<ResponseData>(_responseData));
+            return _responseData;
         }
+        #endregion
     }
 }

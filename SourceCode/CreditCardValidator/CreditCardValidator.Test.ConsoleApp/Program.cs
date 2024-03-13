@@ -2,26 +2,38 @@
 using CreditCardValidator.Business;
 using CreditCardValidator.Business.Rule;
 using CreditCardValidator.Business.Support;
+using CreditCardValidator.Test.ConsoleApp;
 
+
+int Num = -1;
+int.TryParse("ss", out Num);
+
+
+Test A = new Test();
+A.Name = "asda";
+Test B = A;
+A = null;
+
+Int32.Parse(Console.ReadLine());
 
 Console.WriteLine("Not Empty");
-NotEmpty NotEmpty = new NotEmpty();
+RuleNotEmptyValidation NotEmpty = new RuleNotEmptyValidation();
 Console.WriteLine(NotEmpty.IsValid("12212"));
 Console.WriteLine(NotEmpty.IsValid(null));
 Console.WriteLine(NotEmpty.IsValid(""));
 
 Console.WriteLine("");
 Console.WriteLine("Only Numbers");
-OnlyNumbers OnlyNumbers = new OnlyNumbers();
+RuleOnlyNumbersValidation OnlyNumbers = new RuleOnlyNumbersValidation();
 Console.WriteLine(OnlyNumbers.IsValid("121212"));
 Console.WriteLine(OnlyNumbers.IsValid("121212ddd"));
 
 
-CardNumber CardNumber = new CardNumber();
+RuleCardNumberValidation CardNumber = new RuleCardNumberValidation();
 
 Console.WriteLine("");
 Console.WriteLine("Luhn");
-LuhnValidate LuhnValidate = new LuhnValidate();
+RuleLuhnValidation LuhnValidate = new RuleLuhnValidation();
 Console.WriteLine(LuhnValidate.IsValid("4444333322221111"));
 Console.WriteLine(LuhnValidate.IsValid("5105105105105100"));
 Console.WriteLine(LuhnValidate.IsValid("2223000048400011"));
@@ -33,7 +45,7 @@ Console.WriteLine(LuhnValidate.IsValid("4487984578353700"));
 
 
 Console.WriteLine("Validate Card");
-CreditCard CreditCard = new CreditCard(NotEmpty, OnlyNumbers, LuhnValidate, CardNumber);
+CreditCardValidator.Business.CreditCardValidator CreditCard = new CreditCardValidator.Business.CreditCardValidator(NotEmpty, OnlyNumbers, LuhnValidate, CardNumber);
 Console.WriteLine("4444333322221111: "+CreditCard.Validate("4444333322221111"));
 Console.WriteLine("444433332222111: " + CreditCard.Validate("444433332222111"));
 Console.WriteLine("null: " + CreditCard.Validate(null));

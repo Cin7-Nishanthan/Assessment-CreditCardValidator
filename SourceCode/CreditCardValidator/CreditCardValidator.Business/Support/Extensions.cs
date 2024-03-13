@@ -1,35 +1,31 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
 
 namespace CreditCardValidator.Business.Support
 {
     public static class Extensions
     {
-        public static bool IsDigitsOnly(this string Number)
+        #region " Methods "
+
+        public static bool IsDigitsOnly(this string number)
         {
-            foreach (char Num in Number)
+            foreach (char num in number)
             {
-                if (Num < '0' || Num > '9')
+                if (num < '0' || num > '9')
                     return false;
             }
 
             return true;
         }
 
-        public static void ToDigits(this int Number, ref List<int> Digits)
+        public static void ToDigits(this int number, ref List<int> digits)
         {
-            /*if (Number < 10)
-                Digits.Add(Number);
-            else
-                ToDigits(Number / 10, ref Digits);*/
-            char[] Numbers = Number.ToString().ToCharArray();
-            foreach (var Num in Numbers)
+            char[] numbers = number.ToString().ToCharArray();
+            foreach (var num in numbers)
             {
-                Digits.Add(int.Parse(Num.ToString()));
+                digits.Add(int.Parse(num.ToString()));
             }
         }
+
+        #endregion
     }
 }

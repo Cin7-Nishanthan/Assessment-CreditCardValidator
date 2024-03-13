@@ -8,6 +8,6 @@ namespace CreditCardValidator.Business.Rule
 {
     public interface IRule
     {
-        bool IsValid(string CardNumber);
+        bool IsValid(string cardNumber);
     }
 }

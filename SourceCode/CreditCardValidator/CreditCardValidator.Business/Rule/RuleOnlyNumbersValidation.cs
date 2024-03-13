@@ -7,11 +7,11 @@ using CreditCardValidator.Business.Support;
 
 namespace CreditCardValidator.Business.Rule
 {
-    public class OnlyNumbers : IRule
+    public class RuleOnlyNumbersValidation : IRule
     {
-        public bool IsValid(string CardNumber)
+        public bool IsValid(string cardNumber)
         {
-            return CardNumber.IsDigitsOnly();
+            return cardNumber.IsDigitsOnly();
         }
     }
 }

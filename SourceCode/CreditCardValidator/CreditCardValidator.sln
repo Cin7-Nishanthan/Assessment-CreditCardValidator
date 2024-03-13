@@ -25,9 +25,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CreditCardValidator.Test.Co
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CreditCardValidator.Test.NUnit", "CreditCardValidator.Test.NUnit\CreditCardValidator.Test.NUnit.csproj", "{20D9EB9C-CAF7-4DBA-86D2-782E21EC4212}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{96850451-5B7F-41C3-A8BF-B3D6B4991A24}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Utils", "Utils", "{96850451-5B7F-41C3-A8BF-B3D6B4991A24}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CreditCardValidator.Core", "CreditCardValidator.Core\CreditCardValidator.Core.csproj", "{43BBDE21-C30A-457A-A33C-98DFAA95E64F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CreditCardValidator.Logger", "CreditCardValidator.Core\CreditCardValidator.Logger.csproj", "{43BBDE21-C30A-457A-A33C-98DFAA95E64F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{5BF29E43-2654-4A26-A251-440FFBCAD51F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core", "Core\Core.csproj", "{71121CD3-7243-45E7-8B38-381D56448929}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -63,6 +67,10 @@ Global
 		{43BBDE21-C30A-457A-A33C-98DFAA95E64F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{43BBDE21-C30A-457A-A33C-98DFAA95E64F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{43BBDE21-C30A-457A-A33C-98DFAA95E64F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{71121CD3-7243-45E7-8B38-381D56448929}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{71121CD3-7243-45E7-8B38-381D56448929}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{71121CD3-7243-45E7-8B38-381D56448929}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{71121CD3-7243-45E7-8B38-381D56448929}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -75,6 +83,7 @@ Global
 		{5E0BD000-7639-4CB8-8AB1-D16F81D18C85} = {EA5520BA-B0AD-4773-AEB0-30E128957511}
 		{20D9EB9C-CAF7-4DBA-86D2-782E21EC4212} = {EA5520BA-B0AD-4773-AEB0-30E128957511}
 		{43BBDE21-C30A-457A-A33C-98DFAA95E64F} = {96850451-5B7F-41C3-A8BF-B3D6B4991A24}
+		{71121CD3-7243-45E7-8B38-381D56448929} = {5BF29E43-2654-4A26-A251-440FFBCAD51F}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {C9697C8A-B2A7-45A0-8E67-23CD0B5998BF}

@@ -7,8 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\CreditCardValidator.Core\CreditCardValidator.Logger.csproj" />
-    <ProjectReference Include="..\CreditCardValidator.Data\CreditCardValidator.Data.csproj" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.2.5" />
   </ItemGroup>
 
 </Project>

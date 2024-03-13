@@ -1,25 +1,26 @@
-using CreditCardValidator.Business;
+
+
 using CreditCardValidator.Business.Rule;
 
 namespace CreditCardValidator.Test.NUnit
 {
     public class CardNumber_Class_Test
     {
-        NotEmpty NotEmpty;
-        OnlyNumbers OnlyNumbers;
-        LuhnValidate LuhnValidate;
-        CardNumber CardNumber;
-        CreditCard CreditCard;
+        RuleNotEmptyValidation NotEmpty;
+        RuleOnlyNumbersValidation OnlyNumbers;
+        RuleLuhnValidation LuhnValidate;
+        RuleCardNumberValidation CardNumber;
+        Business.CreditCardValidator CreditCard;
 
         [SetUp]
         public void Setup()
         {
-            NotEmpty = new NotEmpty();
-            OnlyNumbers = new OnlyNumbers();
-            LuhnValidate = new LuhnValidate();
-            CardNumber = new CardNumber();
+            NotEmpty = new RuleNotEmptyValidation();
+            OnlyNumbers = new RuleOnlyNumbersValidation();
+            LuhnValidate = new RuleLuhnValidation();
+            CardNumber = new RuleCardNumberValidation();
 
-            CreditCard = new CreditCard(NotEmpty, OnlyNumbers, LuhnValidate, CardNumber);
+            CreditCard = new Business.CreditCardValidator(NotEmpty, OnlyNumbers, LuhnValidate, CardNumber);
         }
 
         [Test]
