@@ -6,10 +6,10 @@
     </div>
     <div class="card-form">
         <label>Card Number: </label>
-        <input type="text" id="cardNo" onkeypress="return isNumberKey(event)"  />
+        <input type="text" id="cardNo" onkeypress="return isNumberKey(event)" />
         <div class="cardbtn-area">
-            <input id="verify" type="button" value="Verify" class="btnVerify" />
-            <input id="clear" type="button" value="Clear" class="btnClear" />
+            <input id="verify" type="button" value="Verify" class="btnVerify" onclick="validate()" />
+            <input id="clear" type="button" value="Clear" class="btnClear" onclick="clearCard()" />
         </div>
     </div>
     <div id="wait" class="loading-gif"><img src="/dist/img/Loading.gif" width="70" height="70" /><br></div>
@@ -17,4 +17,5 @@
 
 <script src="/libs/jquery/dist/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="/javascript/enum.js"></script>
 <script src="/javascript/validator.js"></script>

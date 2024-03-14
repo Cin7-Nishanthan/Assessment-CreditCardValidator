@@ -4,20 +4,22 @@
     align-items: center;
 }
 
-.card-form input {
-    background: whitesmoke;
-    padding: 7px;
-    border: none;
-    width: 20%;
-    margin: 12px 0;
-    border-radius: 3px;
-}
+    .card-form input {
+        background: whitesmoke;
+        padding: 7px;
+        border: none;
+        width: 20%;
+        margin: 12px 0;
+        border-radius: 3px;
+    }
+
 .body-form {
     height: 100vh;
     position: relative;
     width: 100%;
     text-align: center;
 }
+
     .body-form .loading-gif {
         display: none;
         width: 100%;
@@ -28,12 +30,16 @@
         z-index: 2;
     }
 
-    .body-form .loading-gif img {
-        position: fixed;
-        top: 50%;
-        left: 50%;
-    
-    }
+        .body-form .loading-gif img {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+        }
+
+.cardbtn-area {
+    display: flex;
+    align-items: center;
+}
 
     .cardbtn-area .btnVerify {
         background: navy;
@@ -45,14 +51,9 @@
         cursor: pointer;
     }
 
-.cardbtn-area{
-    display: flex;
-    align-items: center;
-}
-
     .cardbtn-area .btnClear,
     .cardbtn-area .btnVerify {
-        width:175px;
+        width: 175px;
     }
 
     .cardbtn-area .btnClear {
@@ -62,6 +63,5 @@
         border: none;
         border-radius: 3px;
         margin-left: 15px;
+        cursor: pointer;
     }
-
-

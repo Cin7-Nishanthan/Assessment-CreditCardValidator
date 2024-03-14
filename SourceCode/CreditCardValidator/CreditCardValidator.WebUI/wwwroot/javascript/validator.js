@@ -1,4 +1,5 @@
-﻿function isNumberKey(evt) 
+﻿var url = 'http://localhost:37059/CreditCardValidator';
+function isNumberKey(evt) 
 {
     let input = document.getElementById("cardNo");
     let charCode = (evt.which) ? evt.which : evt.keyCode;
@@ -27,35 +28,10 @@
     return false;
 }
 
-const ResponseStatus = {
-    Valid: 1000,
-    Invalid: 1001
-}
-
-const ValidationMessage = {
-    Empty: "Please enter card number..",
-    Valid: "Its a valid card..",
-    Invalid: "Its an invalid card..",
-    Error: "Sorry, Something went wrong.."
-}
-
-const PopupTitle = {
-    Valid: "Success..",
-    Invalid: "Sorry..",
-    Error: "Oops..",
-    Empty: "Warning"
-}
-
-const PopupIcon = {
-    Valid: "success",
-    Invalid: "error",
-    Error: "error",
-    Empty: "warning"
-}
-
 function popUpMessage(title, message, icon)
 {
-    Swal.fire({
+    Swal.fire(
+    {
         title: title,
         text: message,
         icon: icon
@@ -69,24 +45,16 @@ function updateResponse(response)
         if (response.data)
             popUpMessage(PopupTitle.Valid, ValidationMessage.Valid, PopupIcon.Valid);
         else
-            popUpMessage(PopupTitle.Invalid, ValidationMessage.Invalid, PopupIcon.Invalid)
+            popUpMessage(PopupTitle.Invalid, ValidationMessage.Invalid, PopupIcon.Invalid);
 
     } else
-        popUpMessage(PopupTitle.Error, ValidationMessage.Error, PopupIcon.Error)
+        popUpMessage(PopupTitle.Error, ValidationMessage.Error, PopupIcon.Error);
 
 }
 
-function CreditCardValidator($, document, url)
+function validate() 
 {
-    this.$ = $;
-    this.document = document;
-    this.url = url || 'http://localhost:37059/CreditCardValidator';
-}
-
-CreditCardValidator.prototype.validate = function () 
-{
-    let self = this;
-    let creditCardNo = self.document.getElementById("cardNo").value.replace(/\s+/g, '');
+    let creditCardNo = document.getElementById("cardNo").value.replace(/\s+/g, '');
 
     if (creditCardNo === "")
     {
@@ -96,7 +64,7 @@ CreditCardValidator.prototype.validate = function ()
     $("#wait").css("display", "block");
 
     $.ajax({
-        url: self.url,
+        url: url,
         type: 'POST',
         contentType: 'application/json',
         data: JSON.stringify(creditCardNo),
@@ -111,23 +79,7 @@ CreditCardValidator.prototype.validate = function ()
     });
 }
 
-CreditCardValidator.prototype.clear = function () 
+function clearCard() 
 {
-    let self = this;
-    self.document.getElementById("cardNo").value = "";
+    document.getElementById("cardNo").value = "";
 }
-
-$(document).ready(function ()
-{
-    var validator = new CreditCardValidator($, document);
-    $('#verify').click(function (e)
-    {
-        e.preventDefault();
-        validator.validate();
-    });
-    $('#clear').click(function (e)
-    {
-        e.preventDefault();
-        validator.clear();
-    })
-});
